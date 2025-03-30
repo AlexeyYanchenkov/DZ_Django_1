@@ -1,0 +1,57 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Телеграм-бот для котиков",
+        "description": "Для канала Котики",
+        "image": "",
+        "category": null,
+        "price": 3000,
+        "created_at": "2025-03-30T19:40:09.721Z",
+        "updated_at": "2025-03-30T19:40:09.721Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Котик-бот",
+        "description": "Телеграмм бот с котиками",
+        "image": "",
+        "category": 1,
+        "price": 4000,
+        "created_at": "2025-03-30T19:51:29.251Z",
+        "updated_at": "2025-03-30T20:07:45.154Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Утилита",
+        "description": "Утилита для поиска значений",
+        "image": "",
+        "category": 2,
+        "price": 8000,
+        "created_at": "2025-03-30T19:52:55.970Z",
+        "updated_at": "2025-03-30T19:52:55.970Z"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Телеграмм боты",
+        "description": "Телеграмм боты на любой вкус"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Веб и утилиты",
+        "description": "Веб приложения и утилиты на любой вкус"
+    }
+}
+]
