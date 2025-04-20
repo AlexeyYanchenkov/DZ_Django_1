@@ -1,1 +1,1 @@
-# DZ_Django_1
+# Django ORM
