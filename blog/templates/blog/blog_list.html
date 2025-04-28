@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+    <h2>Список статей</h2>
+    <ul class="list-group">
+        {% for post in object_list %}
+            <li class="list-group-item">
+                <a href="{% url 'blog:blog_detail' post.pk %}">{{ post.title }}</a>
+                <small class="text-muted d-block">Просмотров: {{ post.views_count }}</small>
+            </li>
+        {% empty %}
+            <li class="list-group-item">Нет опубликованных статей.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'blog:blog_create' %}" class="btn btn-primary mt-3">Создать статью</a>
+{% endblock %}
