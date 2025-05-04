@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Главная — Статистика{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="my-4">Статистика рассылок</h2>
+    <ul class="list-group">
+        <li class="list-group-item">Всего рассылок: {{ total_mailings }}</li>
+        <li class="list-group-item">Активных рассылок: {{ active_mailings }}</li>
+        <li class="list-group-item">Уникальных клиентов: {{ unique_clients }}</li>
+    </ul>
+</div>
+{% endblock %}
