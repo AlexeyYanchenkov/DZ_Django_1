@@ -1,5 +1,19 @@
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from .models import Product
+from .forms import ProductForm
+from django.urls import reverse_lazy
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:product_list')
 
 class HomePageView(ListView):
     model = Product
@@ -13,3 +27,8 @@ class ProductDetailView(DetailView):
 
 class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/product_list.html'
+    context_object_name = 'products_list'

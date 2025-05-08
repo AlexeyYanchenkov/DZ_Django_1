@@ -7,8 +7,8 @@ from config.settings import DEBUG
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('catalog.urls')),
-                  path('blogs/', include('blog.urls')),
+                  path('', include('catalog.urls'), namespace='catalog'),
+                  path('blogs/', include('blog.urls'), namespace='blog'),
                   path('mailing/', include('mailing.urls', namespace='mailing')),
     ]
 
