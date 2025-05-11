@@ -7,10 +7,12 @@ from config.settings import DEBUG
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
-                  path('', include('catalog.urls'), namespace='catalog'),
-                  path('blogs/', include('blog.urls'), namespace='blog'),
-                  path('mailing/', include('mailing.urls', namespace='mailing')),
-    ]
+                  path('', include('catalog.urls')),
+                  path('blogs/', include('blog.urls')),
+                  path('mailing/', include('mailing.urls')),
+                  path('users/', include('users.urls')),
+]
+
 
 if settings.DEBUG :
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

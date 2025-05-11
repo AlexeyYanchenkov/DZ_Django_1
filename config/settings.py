@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'catalog',
     'blog',
     'mailing',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -138,10 +139,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'                # SMTP-сервер (у Gmail — smtp.gmail.com)
+EMAIL_HOST = 'smtp.yandex.ru'                # SMTP-сервер (у Gmail — smtp.gmail.com)
 EMAIL_PORT = 587                             # Порт (587 для TLS)
-EMAIL_USE_TLS = True                         # Использовать TLS (рекомендуется)
-EMAIL_USE_SSL = False                        # SSL обычно False, если TLS True
-EMAIL_HOST_USER = 'alexeyyanchenkov25@gmail.com'     #  email
-EMAIL_HOST_PASSWORD = 'ANTIPIZDEZ'    # Пароль или специальный "app password"
+EMAIL_USE_TLS = False                         # Использовать TLS (рекомендуется)
+EMAIL_USE_SSL = True                        # SSL обычно False, если TLS True
+EMAIL_HOST_USER = 'clickandgo1346@yandex.ru'     #  email
+EMAIL_HOST_PASSWORD = 'lqecgcnznkukdvwc'    # Пароль или специальный "app password"
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER         # От кого отправлять письма по умолчанию
+
+LOGIN_REDIRECT_URL = 'home'
+AUTH_USER_MODEL = 'users.CustomUser'
+LOGIN_URL = 'users:login'
