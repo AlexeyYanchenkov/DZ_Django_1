@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+
 
 NULLABLE = {"blank": True, "null": True}
 
@@ -28,10 +30,20 @@ class Product(models.Model):
     price = models.IntegerField(
         verbose_name="Цена", help_text="Укажите цену", **NULLABLE
     )
+
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='products'
+    )
+    is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего изменения")
 
     class Meta:
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+        ]
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
         ordering = ["name", "price"]
