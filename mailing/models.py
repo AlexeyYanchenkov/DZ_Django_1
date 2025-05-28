@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.conf import settings
 
 class Client(models.Model):
     email = models.EmailField(unique=True)
@@ -27,9 +29,19 @@ class Mailing(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='created')
     message = models.ForeignKey(Message, on_delete=models.CASCADE)
     recipients = models.ManyToManyField(Client)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='mailings')
 
     def __str__(self):
         return f"Рассылка #{self.id} — {self.get_status_display()}"
+
+    def success_attempts_count(self):
+        return self.attempts.filter(status='success').count()
+
+    def failed_attempts_count(self):
+        return self.attempts.filter(status='failed').count()
+
+    def total_messages_sent(self):
+        return self.attempts.count()
 
 class MailingAttempt(models.Model):
     STATUS_CHOICES = [

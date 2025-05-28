@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Статистика ваших рассылок</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Статус</th>
+            <th>Успешные</th>
+            <th>Неуспешные</th>
+            <th>Всего отправлено</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mailing in mailings %}
+        <tr>
+            <td>{{ mailing.id }}</td>
+            <td>{{ mailing.get_status_display }}</td>
+            <td>{{ mailing.success_attempts_count }}</td>
+            <td>{{ mailing.failed_attempts_count }}</td>
+            <td>{{ mailing.total_messages_sent }}</td>
+            <td>
+                {% if user == mailing.owner or user.groups.filter(name='Менеджер').exists %}
+                    <a href="{% url 'mailing_edit' mailing.id %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                    <a href="{% url 'mailing_delete' mailing.id %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+                {% else %}
+                    <span class="text-muted">Нет доступа</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

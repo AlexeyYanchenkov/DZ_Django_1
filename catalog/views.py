@@ -50,7 +50,7 @@ class HomePageView(ListView):
     template_name = 'catalog/home.html'
     context_object_name = 'products'
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
+#@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_detail.html'

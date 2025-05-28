@@ -1,7 +1,34 @@
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, CreateView
 from .models import Client, Message, Mailing
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+class MailingStatisticsView(LoginRequiredMixin, ListView):
+    model = Mailing
+    template_name = 'mailing/statistics.html'
+    context_object_name = 'mailings'
+
+    def get_queryset(self):
+        return Mailing.objects.filter(owner=self.request.user)
+
+class MailingCreateView(UserPassesTestMixin, LoginRequiredMixin, CreateView):
+
+    model = Mailing
+    fields = ['start_time', 'end_time', 'message', 'recipients']  # поля для заполнения в форме
+    template_name = 'mailing/mailing_form.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user  # назначаем владельца
+        return super().form_valid(form)
+
+    def test_func(self):
+        mailing = self.get_object()
+        return (
+                self.request.user == mailing.owner or
+                self.request.user.groups.filter(name='Менеджер').exists()
+        )
 
 def send_mailing(mailing):
     for client in mailing.recipients.all():
