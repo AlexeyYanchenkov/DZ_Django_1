@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Создать рассылку{% endblock %}
+
+{% block content %}
+  <h2>Создать новую рассылку</h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </form>
+
+  <a href="{% url 'catalog:home' %}">← Назад</a>
+{% endblock %}
